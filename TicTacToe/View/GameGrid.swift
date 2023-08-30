@@ -16,12 +16,35 @@ class GameGrid: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        backgroundColor = .systemBackground
         configureGrid()
         configureSubviews()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    override func draw(_ rect: CGRect) {
+        let offset = rect.width / 6
+        
+        let path = UIBezierPath()
+        path.move(to: CGPoint(x: gridContainerView.frame.midX - offset, y: gridContainerView.frame.minY))
+        path.addLine(to: CGPoint(x: gridContainerView.frame.midX - offset, y: gridContainerView.frame.maxY))
+        
+        path.move(to: CGPoint(x: gridContainerView.frame.midX + offset, y: gridContainerView.frame.minY))
+        path.addLine(to: CGPoint(x: gridContainerView.frame.midX + offset, y: gridContainerView.frame.maxY))
+        
+        path.move(to: CGPoint(x: gridContainerView.frame.minX, y: gridContainerView.frame.midY - offset))
+        path.addLine(to: CGPoint(x: gridContainerView.frame.maxX, y: gridContainerView.frame.midY - offset))
+        
+        path.move(to: CGPoint(x: gridContainerView.frame.minX, y: gridContainerView.frame.midY + offset))
+        path.addLine(to: CGPoint(x: gridContainerView.frame.maxX, y: gridContainerView.frame.midY + offset))
+
+        UIColor.black.setStroke()
+        path.lineWidth = 3.0
+        
+        path.stroke()
     }
     
     // MARK: - Private Methods
@@ -49,8 +72,8 @@ class GameGrid: UIView {
         NSLayoutConstraint.activate([
             gridContainerView.leadingAnchor.constraint(equalTo: leadingAnchor),
             gridContainerView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            gridContainerView.topAnchor.constraint(equalTo: topAnchor),
-            gridContainerView.bottomAnchor.constraint(equalTo: bottomAnchor)
+            gridContainerView.heightAnchor.constraint(equalTo: gridContainerView.widthAnchor),
+            gridContainerView.centerYAnchor.constraint(equalTo: centerYAnchor)
         ])
     }
     

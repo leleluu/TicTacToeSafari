@@ -59,12 +59,20 @@
 				387E814D2A9F261C000AD21C /* AppDelegate.swift */,
 				387E814F2A9F261C000AD21C /* SceneDelegate.swift */,
 				387E81512A9F261C000AD21C /* GameViewController.swift */,
-				387E81612A9F37CD000AD21C /* GameGrid.swift */,
+				387E81632A9F7F37000AD21C /* View */,
 				387E81562A9F261F000AD21C /* Assets.xcassets */,
 				387E81582A9F261F000AD21C /* LaunchScreen.storyboard */,
 				387E815B2A9F261F000AD21C /* Info.plist */,
 			);
 			path = TicTacToe;
+			sourceTree = "<group>";
+		};
+		387E81632A9F7F37000AD21C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				387E81612A9F37CD000AD21C /* GameGrid.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

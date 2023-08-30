@@ -54,13 +54,13 @@ class GameViewController: UIViewController {
             gameGrid.leadingAnchor.constraint(equalTo: turnIndicatorLabel.leadingAnchor),
             gameGrid.trailingAnchor.constraint(equalTo: turnIndicatorLabel.trailingAnchor),
             gameGrid.bottomAnchor.constraint(equalTo: gameStatusLabel.topAnchor),
-            gameGrid.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.7),
+            gameGrid.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.6),
             
             // game status label
             gameStatusLabel.leadingAnchor.constraint(equalTo: turnIndicatorLabel.leadingAnchor),
             gameStatusLabel.trailingAnchor.constraint(equalTo: turnIndicatorLabel.trailingAnchor),
             gameStatusLabel.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            gameStatusLabel.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.1)
+            gameStatusLabel.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.2)
         ])
     }
 }
