@@ -18,8 +18,9 @@ class GameViewController: UIViewController {
     
     private lazy var gameStatusLabel: UILabel = {
         let label = UILabel()
-        label.backgroundColor = .systemBlue
         label.text = "X moves left"
+        label.font = UIFont.preferredFont(forTextStyle: .title1)
+        label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
