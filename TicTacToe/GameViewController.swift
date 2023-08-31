@@ -4,12 +4,10 @@ class GameViewController: UIViewController {
     
     // MARK: - Private Properties
     
-    private lazy var turnIndicatorLabel: UILabel = {
-        let label = UILabel()
-        label.backgroundColor = .systemGreen
-        label.text = "Player A vs Player B"
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
+    private lazy var playerTurnIndicator: PlayerTurnIndicatorView = {
+        let view = PlayerTurnIndicatorView(frame: .zero)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
 
     private lazy var gameGrid: GameGrid = {
@@ -38,27 +36,27 @@ class GameViewController: UIViewController {
     // MARK: - Private Methods
     
     private func configureViews() {
-        view.addSubview(turnIndicatorLabel)
+        view.addSubview(playerTurnIndicator)
         view.addSubview(gameGrid)
         view.addSubview(gameStatusLabel)
         
         NSLayoutConstraint.activate([
             // turn indicator label
-            turnIndicatorLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            turnIndicatorLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            turnIndicatorLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            turnIndicatorLabel.bottomAnchor.constraint(equalTo: gameGrid.topAnchor),
-            turnIndicatorLabel.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.2),
+            playerTurnIndicator.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            playerTurnIndicator.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            playerTurnIndicator.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            playerTurnIndicator.bottomAnchor.constraint(equalTo: gameGrid.topAnchor),
+            playerTurnIndicator.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.2),
             
             // game grid
-            gameGrid.leadingAnchor.constraint(equalTo: turnIndicatorLabel.leadingAnchor),
-            gameGrid.trailingAnchor.constraint(equalTo: turnIndicatorLabel.trailingAnchor),
+            gameGrid.leadingAnchor.constraint(equalTo: playerTurnIndicator.leadingAnchor),
+            gameGrid.trailingAnchor.constraint(equalTo: playerTurnIndicator.trailingAnchor),
             gameGrid.bottomAnchor.constraint(equalTo: gameStatusLabel.topAnchor),
             gameGrid.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.6),
             
             // game status label
-            gameStatusLabel.leadingAnchor.constraint(equalTo: turnIndicatorLabel.leadingAnchor),
-            gameStatusLabel.trailingAnchor.constraint(equalTo: turnIndicatorLabel.trailingAnchor),
+            gameStatusLabel.leadingAnchor.constraint(equalTo: playerTurnIndicator.leadingAnchor),
+            gameStatusLabel.trailingAnchor.constraint(equalTo: playerTurnIndicator.trailingAnchor),
             gameStatusLabel.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             gameStatusLabel.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.2)
         ])

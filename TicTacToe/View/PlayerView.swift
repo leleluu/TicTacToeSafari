@@ -8,7 +8,6 @@ class PlayerView: UIView {
         let label = UILabel()
         label.text = "A"
         label.font = UIFont.preferredFont(forTextStyle: .largeTitle)
-        label.adjustsFontSizeToFitWidth = true
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -19,14 +18,17 @@ class PlayerView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .systemBackground
-        layer.borderWidth = 3
-        layer.borderColor = UIColor.black.cgColor
-        layer.cornerRadius = layer.bounds.width / 2
         configureSubviews()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func layoutSubviews() {
+        layer.borderWidth = 3
+        layer.borderColor = UIColor.black.cgColor
+        layer.cornerRadius = layer.bounds.width / 2
     }
     
     // MARK: - Private Methods
@@ -35,10 +37,11 @@ class PlayerView: UIView {
         addSubview(playerNameLabel)
         
         NSLayoutConstraint.activate([
+            widthAnchor.constraint(equalTo: heightAnchor),
             playerNameLabel.topAnchor.constraint(equalTo: topAnchor),
             playerNameLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
-            playerNameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
-            playerNameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
+            playerNameLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
+            playerNameLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
         ])
     }
 }
