@@ -1,7 +1,7 @@
 import UIKit
 
 class PlayerTurnIndicatorView: UIView {
-    
+        
     // MARK: - Private Properties
     
     private lazy var containerView: UIStackView = {
@@ -21,12 +21,14 @@ class PlayerTurnIndicatorView: UIView {
     
     private lazy var playerOneView: PlayerView = {
         let view = PlayerView(frame: .zero)
+        view.isActive = true 
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
     private lazy var playerTwoView: PlayerView = {
         let view = PlayerView(frame: .zero)
+        view.isActive = false
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -63,5 +65,12 @@ class PlayerTurnIndicatorView: UIView {
             containerView.leadingAnchor.constraint(equalTo: leadingAnchor),
             containerView.trailingAnchor.constraint(equalTo: trailingAnchor),
         ])
+    }
+    
+    // MARK: - Public Methods
+    
+    func toggleActivePlayer() {
+        playerOneView.isActive.toggle()
+        playerTwoView.isActive.toggle()
     }
 }

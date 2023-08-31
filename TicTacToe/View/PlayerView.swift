@@ -2,6 +2,18 @@ import UIKit
 
 class PlayerView: UIView {
     
+    // MARK: - Public Properties
+    
+    var isActive = false {
+        didSet {
+            if isActive {
+                backgroundColor = .systemOrange.withAlphaComponent(0.5)
+            } else {
+                backgroundColor = .systemBackground
+            }
+        }
+    }
+    
     // MARK: - Private Properties
     
     private lazy var playerNameLabel: UILabel = {
@@ -27,7 +39,6 @@ class PlayerView: UIView {
     
     override func layoutSubviews() {
         layer.borderWidth = 3
-        layer.borderColor = UIColor.black.cgColor
         layer.cornerRadius = layer.bounds.width / 2
     }
     
@@ -44,4 +55,5 @@ class PlayerView: UIView {
             playerNameLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
         ])
     }
+    
 }
