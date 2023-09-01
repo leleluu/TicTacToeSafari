@@ -60,6 +60,7 @@ class GameGrid: UIView {
                     print("row: \(row)")
                     print("column: \(column)")
                 }))
+  
                 rowStackView.addArrangedSubview(button)
             }
             gridContainerView.addArrangedSubview(rowStackView)
@@ -77,4 +78,12 @@ class GameGrid: UIView {
         ])
     }
     
+    // MARK: - Public Methods
+    
+    func placeMarking(row: Int, column: Int, marking: String) {
+        let validRange = 0...2
+        guard validRange.contains(row) && validRange.contains(column) else { return }
+        let button = gridContainerView.subviews[row].subviews[column] as? UIButton
+        button?.setTitle(marking, for: .normal)
+    }
 }
