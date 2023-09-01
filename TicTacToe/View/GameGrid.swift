@@ -4,6 +4,8 @@ class GameGrid: UIView {
     
     // MARK: - Private Properties
     
+    private var buttons = [(button: UIButton, row: Int, column: Int)]()
+    
     private lazy var gridContainerView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -60,7 +62,9 @@ class GameGrid: UIView {
                     print("row: \(row)")
                     print("column: \(column)")
                 }))
-  
+                
+                var buttonWithCoordinates = (button: button, row: row, column: column)
+                buttons.append(buttonWithCoordinates)
                 rowStackView.addArrangedSubview(button)
             }
             gridContainerView.addArrangedSubview(rowStackView)
@@ -80,10 +84,14 @@ class GameGrid: UIView {
     
     // MARK: - Public Methods
     
-    func placeMarking(row: Int, column: Int, marking: String) {
+    func setPlayerMarker(_ marker: String, row: Int, column: Int) {
         let validRange = 0...2
         guard validRange.contains(row) && validRange.contains(column) else { return }
-        let button = gridContainerView.subviews[row].subviews[column] as? UIButton
-        button?.setTitle(marking, for: .normal)
+        
+        for item in buttons {
+            if item.row == row && item.column == column {
+                item.button.setTitle(marker, for: .normal)
+            }
+        }
     }
 }
