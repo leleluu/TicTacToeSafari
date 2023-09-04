@@ -4,6 +4,8 @@ class GameViewController: UIViewController {
     
     // MARK: - Private Properties
     
+    private let viewModel = GameViewModel()
+    
     private lazy var playerTurnIndicator: PlayerTurnIndicatorView = {
         let view = PlayerTurnIndicatorView(frame: .zero)
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -18,7 +20,7 @@ class GameViewController: UIViewController {
     
     private lazy var gameStatusLabel: UILabel = {
         let label = UILabel()
-        label.text = "X moves left"
+        label.text = viewModel.numberOfMovesLeftText
         label.font = UIFont.preferredFont(forTextStyle: .title1)
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -32,6 +34,11 @@ class GameViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         configureViews()
+        viewModel.onStateChange = { [weak self] in
+            guard let self else { return }
+            self.gameStatusLabel.text = self.viewModel.numberOfMovesLeftText
+        }
+
     }
 
     // MARK: - Private Methods
@@ -61,6 +68,12 @@ class GameViewController: UIViewController {
             gameStatusLabel.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             gameStatusLabel.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.2)
         ])
+    }
+    
+    // MARK: - Public Methods
+    
+    func moveMade() {
+        viewModel.moveTaken()
     }
 }
 
