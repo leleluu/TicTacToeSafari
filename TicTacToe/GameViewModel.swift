@@ -8,6 +8,9 @@ class GameViewModel {
     
     // MARK: - Public Properties
     
+    var playerOneName = Player.one.name
+    var playerTwoName = Player.two.name
+    
     var numberOfMovesLeftText: String {
         "\(numberOfMovesLeft) number of moves left"
     }
@@ -36,5 +39,14 @@ extension GameViewModel {
     enum Player {
         case one
         case two
+    
+        var name: String {
+            switch self {
+            case .one:
+                return "🐶"
+            case .two:
+                return "🐱"
+            }
+        }
     }
 }

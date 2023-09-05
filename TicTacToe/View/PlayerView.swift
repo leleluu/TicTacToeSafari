@@ -56,4 +56,8 @@ class PlayerView: UIView {
         ])
     }
     
+    func setPlayerName(_ name: String) {
+        playerNameLabel.text = name
+    }
+    
 }

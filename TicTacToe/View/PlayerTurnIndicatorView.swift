@@ -81,6 +81,13 @@ class PlayerTurnIndicatorView: UIView {
             containerView.trailingAnchor.constraint(equalTo: trailingAnchor),
         ])
     }
+    
+    // MARK: - Public Methods
+    
+    func setPlayerNames(playerOneName: String, playerTwoName: String) {
+        playerOneView.setPlayerName(playerOneName)
+        playerTwoView.setPlayerName(playerTwoName)
+    }
 
 }
 
