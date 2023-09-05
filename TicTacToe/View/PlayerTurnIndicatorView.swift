@@ -1,6 +1,23 @@
 import UIKit
 
 class PlayerTurnIndicatorView: UIView {
+    
+    // MARK: - Public Properties
+    
+    var activePlayer: Player? {
+        didSet {
+            switch activePlayer {
+            case .none:
+                break
+            case .one:
+                playerOneView.isActive = true
+                playerTwoView.isActive = false
+            case .two:
+                playerTwoView.isActive = true
+                playerOneView.isActive = false
+            }
+        }
+    }
         
     // MARK: - Private Properties
     
@@ -21,14 +38,12 @@ class PlayerTurnIndicatorView: UIView {
     
     private lazy var playerOneView: PlayerView = {
         let view = PlayerView(frame: .zero)
-        view.isActive = true 
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
     private lazy var playerTwoView: PlayerView = {
         let view = PlayerView(frame: .zero)
-        view.isActive = false
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -66,11 +81,12 @@ class PlayerTurnIndicatorView: UIView {
             containerView.trailingAnchor.constraint(equalTo: trailingAnchor),
         ])
     }
-    
-    // MARK: - Public Methods
-    
-    func toggleActivePlayer() {
-        playerOneView.isActive.toggle()
-        playerTwoView.isActive.toggle()
+
+}
+
+extension PlayerTurnIndicatorView {
+    enum Player {
+        case one
+        case two
     }
 }

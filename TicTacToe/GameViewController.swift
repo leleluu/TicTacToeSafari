@@ -36,9 +36,9 @@ class GameViewController: UIViewController {
         configureViews()
         viewModel.onStateChange = { [weak self] in
             guard let self else { return }
-            self.gameStatusLabel.text = self.viewModel.numberOfMovesLeftText
+            self.updateViewStateWithViewModel()
         }
-
+        updateViewStateWithViewModel()
     }
 
     // MARK: - Private Methods
@@ -70,6 +70,15 @@ class GameViewController: UIViewController {
         ])
     }
     
+    private func updateViewStateWithViewModel() {
+        self.gameStatusLabel.text = self.viewModel.numberOfMovesLeftText
+        switch viewModel.activePlayer {
+        case .one:
+            self.playerTurnIndicator.activePlayer = .one
+        case .two:
+            self.playerTurnIndicator.activePlayer = .two
+        }
+    }
     // MARK: - Public Methods
     
     func moveMade() {
