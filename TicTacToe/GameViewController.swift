@@ -39,6 +39,10 @@ class GameViewController: UIViewController {
             self.updateViewStateWithViewModel()
         }
         updateViewStateWithViewModel()
+        
+        gameGrid.onTap = { [weak self] in
+            self?.viewModel.moveTaken()
+        }
     }
 
     // MARK: - Private Methods
@@ -78,11 +82,6 @@ class GameViewController: UIViewController {
         case .two:
             self.playerTurnIndicator.activePlayer = .two
         }
-    }
-    // MARK: - Public Methods
-    
-    func moveMade() {
-        viewModel.moveTaken()
     }
 }
 

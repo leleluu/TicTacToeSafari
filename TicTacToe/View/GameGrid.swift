@@ -2,6 +2,10 @@ import UIKit
 
 class GameGrid: UIView {
     
+    // MARK: - Public Properties
+    
+    var onTap: (() -> ())?
+    
     // MARK: - Private Properties
     
     private var buttons = [(button: UIButton, row: Int, column: Int)]()
@@ -58,12 +62,13 @@ class GameGrid: UIView {
             rowStackView.distribution = .fillEqually
             
             for column in 0...2 {
-                let button = UIButton(type: .system, primaryAction: UIAction(title: "button", handler: { _ in
+                let button = UIButton(type: .system, primaryAction: UIAction(title: "button", handler: { [weak self] _ in
                     print("row: \(row)")
                     print("column: \(column)")
+                    self?.onTap?()
                 }))
                 
-                var buttonWithCoordinates = (button: button, row: row, column: column)
+                let buttonWithCoordinates = (button: button, row: row, column: column)
                 buttons.append(buttonWithCoordinates)
                 rowStackView.addArrangedSubview(button)
             }
