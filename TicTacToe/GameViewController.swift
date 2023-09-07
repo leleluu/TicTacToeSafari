@@ -74,17 +74,12 @@ class GameViewController: UIViewController {
     }
     
     private func updateViewStateWithViewModel() {
-        self.gameStatusLabel.text = self.viewModel.numberOfMovesLeftText
-        self.playerTurnIndicator.setPlayerNames(playerOneName: viewModel.playerOneName, playerTwoName: viewModel.playerTwoName)
-        for move in self.viewModel.moves {
-            self.gameGrid.setPlayerMarker(move.playerName, row: move.indexPath.row, column: move.indexPath.section)
+        gameStatusLabel.text = viewModel.numberOfMovesLeftText
+        playerTurnIndicator.setPlayerNames(playerOneName: viewModel.playerOneName, playerTwoName: viewModel.playerTwoName)
+        for move in viewModel.moves {
+            gameGrid.setPlayerMarker(move.playerName, row: move.indexPath.row, column: move.indexPath.section)
         }
-        switch viewModel.activePlayer {
-        case .one:
-            self.playerTurnIndicator.activePlayer = .one
-        case .two:
-            self.playerTurnIndicator.activePlayer = .two
-        }
+        playerTurnIndicator.activePlayerIndex = viewModel.activePlayerIndex
     }
         
 }

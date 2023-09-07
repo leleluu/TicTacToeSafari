@@ -4,17 +4,17 @@ class PlayerTurnIndicatorView: UIView {
     
     // MARK: - Public Properties
     
-    var activePlayer: Player? {
+    var activePlayerIndex: Int? {
         didSet {
-            switch activePlayer {
-            case .none:
-                break
-            case .one:
+            switch activePlayerIndex {
+            case 0:
                 playerOneView.isActive = true
                 playerTwoView.isActive = false
-            case .two:
+            case 1:
                 playerTwoView.isActive = true
                 playerOneView.isActive = false
+            default:
+                break
             }
         }
     }
@@ -89,11 +89,4 @@ class PlayerTurnIndicatorView: UIView {
         playerTwoView.setPlayerName(playerTwoName)
     }
 
-}
-
-extension PlayerTurnIndicatorView {
-    enum Player {
-        case one
-        case two
-    }
 }

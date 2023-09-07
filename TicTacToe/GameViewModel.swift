@@ -7,18 +7,28 @@ class GameViewModel {
     // MARK: - Private Properties
     
     private var numberOfMovesLeft = 9
+    private var activePlayer = Player.one
     
     // MARK: - Public Properties
     
     var moves = [Move]()
 
-    var playerOneName = Player.one.name
+    var playerOneName = Player.one.name 
     var playerTwoName = Player.two.name
         
     var numberOfMovesLeftText: String {
         "\(numberOfMovesLeft) number of moves left"
     }
-    var activePlayer: Player = .one
+    
+    var activePlayerIndex: Int {
+        switch activePlayer {
+        case .one:
+            return 0
+        case .two:
+            return 1
+        }
+    }
+    
     var onStateChange: (() -> ())?
     
     // MARK: - Public Methods
