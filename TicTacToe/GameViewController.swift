@@ -39,8 +39,8 @@ class GameViewController: UIViewController {
             self.updateViewStateWithViewModel()
         }
         updateViewStateWithViewModel()
-        gameGrid.onTap = { [weak self] in
-            self?.viewModel.moveTaken()
+        gameGrid.onTap = { [weak self] row, column in
+            self?.viewModel.takeTurn(row: row, column: column) // hey button got tapped, so tell viewmodel this. 
         }
     }
 
@@ -76,6 +76,9 @@ class GameViewController: UIViewController {
     private func updateViewStateWithViewModel() {
         self.gameStatusLabel.text = self.viewModel.numberOfMovesLeftText
         self.playerTurnIndicator.setPlayerNames(playerOneName: viewModel.playerOneName, playerTwoName: viewModel.playerTwoName)
+        for move in self.viewModel.moves {
+            self.gameGrid.setPlayerMarker(move.playerName, row: move.indexPath.row, column: move.indexPath.section)
+        }
         switch viewModel.activePlayer {
         case .one:
             self.playerTurnIndicator.activePlayer = .one
@@ -83,5 +86,6 @@ class GameViewController: UIViewController {
             self.playerTurnIndicator.activePlayer = .two
         }
     }
+        
 }
 

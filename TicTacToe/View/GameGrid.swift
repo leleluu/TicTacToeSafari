@@ -4,7 +4,7 @@ class GameGrid: UIView {
     
     // MARK: - Public Properties
     
-    var onTap: (() -> ())?
+    var onTap: ((Int, Int) -> ())?
     
     // MARK: - Private Properties
     
@@ -62,10 +62,8 @@ class GameGrid: UIView {
             rowStackView.distribution = .fillEqually
             
             for column in 0...2 {
-                let button = UIButton(type: .system, primaryAction: UIAction(title: "button", handler: { [weak self] _ in
-                    print("row: \(row)")
-                    print("column: \(column)")
-                    self?.onTap?()
+                let button = UIButton(type: .system, primaryAction: UIAction(handler: { [weak self] action in
+                    self?.onTap?(row, column)
                 }))
                 
                 let buttonWithCoordinates = (button: button, row: row, column: column)
@@ -96,6 +94,8 @@ class GameGrid: UIView {
         for item in buttons {
             if item.row == row && item.column == column {
                 item.button.setTitle(marker, for: .normal)
+                item.button.titleLabel?.font = UIFont.preferredFont(forTextStyle: .largeTitle)
+                item.button.isEnabled = false
             }
         }
     }

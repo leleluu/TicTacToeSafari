@@ -2,15 +2,19 @@ import Foundation
 
 class GameViewModel {
     
+    typealias Move = (playerName: String, indexPath: IndexPath)
+    
     // MARK: - Private Properties
     
     private var numberOfMovesLeft = 9
     
     // MARK: - Public Properties
     
+    var moves = [Move]()
+
     var playerOneName = Player.one.name
     var playerTwoName = Player.two.name
-    
+        
     var numberOfMovesLeftText: String {
         "\(numberOfMovesLeft) number of moves left"
     }
@@ -19,11 +23,15 @@ class GameViewModel {
     
     // MARK: - Public Methods
     
-    func moveTaken() {
+    func takeTurn(row: Int, column: Int) {
+        let tappedPosition = IndexPath(row: row, section: column)
+        moves.append((activePlayer.name, tappedPosition))
         numberOfMovesLeft -= 1
         toggleActivePlayer()
         onStateChange?() 
     }
+    
+    // MARK: - Private Methods
     
     private func toggleActivePlayer() {
         if activePlayer == .one {
@@ -48,5 +56,6 @@ extension GameViewModel {
                 return "🐱"
             }
         }
+        
     }
 }
