@@ -76,10 +76,14 @@ class GameViewController: UIViewController {
     private func updateViewStateWithViewModel() {
         gameStatusLabel.text = viewModel.numberOfMovesLeftText
         playerTurnIndicator.setPlayerNames(playerOneName: viewModel.playerOneName, playerTwoName: viewModel.playerTwoName)
-        for move in viewModel.moves {
-            gameGrid.setPlayerMarker(move.playerName, row: move.position.row, column: move.position.section)
+        for marker in viewModel.markers {
+            gameGrid.setPlayerMarker(marker.playerName, row: marker.row, column: marker.column)
         }
         playerTurnIndicator.activePlayerIndex = viewModel.activePlayerIndex
+        
+        if let winner = viewModel.winner {
+            // present alert
+        }
     }
         
 }
