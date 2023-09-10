@@ -2,7 +2,7 @@ import Foundation
 
 class GameViewModel {
     
-    typealias Marker = (playerName: String, row: Int, column: Int)
+    typealias Marker = (playerName: String?, row: Int, column: Int)
     
     // MARK: - Private Properties
     
@@ -21,20 +21,19 @@ class GameViewModel {
     var winner: String?
     
     var markers: [Marker] {
-        
         var markers: [Marker] = []
         for row in 0...grid.rows - 1 {
             for column in 0...grid.columns - 1 {
-                if let name = grid.get(row: row, column: column)  {
-                    let marker = (
-                        playerName: name,
-                        row: row,
-                        column: column
-                    )
-                    markers.append(marker)
-                }
+                
+                let name = grid.get(row: row, column: column)
+                let marker = (
+                    playerName: name,
+                    row: row,
+                    column: column
+                )
+                markers.append(marker)
             }
-        } 
+        }
         return markers
     }
 
@@ -68,6 +67,21 @@ class GameViewModel {
         numberOfMovesLeft -= 1
         model.toggleActivePlayer()
         onStateChange?() 
+    }
+    
+    func didTapRematch() {
+        // reset state
+        grid = Grid(rows: 3, columns: 3)
+        numberOfMovesLeft = 9
+        
+        // TODO: Pick random emojis
+        model = GameModel(
+            playerOne: Player(name: "🐳", isActive: true),
+            playerTwo: Player(name: "🦆", isActive: false)
+        )
+        winner = nil
+        onStateChange?()
+        
     }
 
     func checkForWinner() {

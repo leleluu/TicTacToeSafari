@@ -91,11 +91,23 @@ class GameGrid: UIView {
         let validRange = 0...2
         guard validRange.contains(row) && validRange.contains(column) else { return }
         
-        for item in buttons {
-            if item.row == row && item.column == column {
-                item.button.setTitle(marker, for: .normal)
-                item.button.titleLabel?.font = UIFont.preferredFont(forTextStyle: .largeTitle)
-                item.button.isEnabled = false
+        for button in buttons {
+            if button.row == row && button.column == column {
+                button.button.setTitle(marker, for: .normal)
+                button.button.titleLabel?.font = UIFont.preferredFont(forTextStyle: .largeTitle)
+                button.button.isEnabled = false
+            }
+        }
+    }
+    
+    func resetPlayerMarker(row: Int, column: Int) {
+        let validRange = 0...2
+        guard validRange.contains(row) && validRange.contains(column) else { return }
+        
+        for button in buttons {
+            if button.row == row && button.column == column {
+                button.button.setTitle(nil, for: .normal)
+                button.button.isEnabled = true
             }
         }
     }

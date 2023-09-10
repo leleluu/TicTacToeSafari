@@ -77,13 +77,22 @@ class GameViewController: UIViewController {
         gameStatusLabel.text = viewModel.numberOfMovesLeftText
         playerTurnIndicator.setPlayerNames(playerOneName: viewModel.playerOneName, playerTwoName: viewModel.playerTwoName)
         for marker in viewModel.markers {
-            gameGrid.setPlayerMarker(marker.playerName, row: marker.row, column: marker.column)
+            if let playerName = marker.playerName {
+                gameGrid.setPlayerMarker(playerName, row: marker.row, column: marker.column)
+            } else {
+                gameGrid.resetPlayerMarker(row: marker.row, column: marker.column)
+            }
         }
         playerTurnIndicator.activePlayerIndex = viewModel.activePlayerIndex
         
         if let winner = viewModel.winner {
             let alert = UIAlertController(title: "\(winner) won!", message: nil, preferredStyle: .alert)
+            let rematchAction = UIAlertAction(title: "Rematch", style: .default) { [weak self] action in
+                self?.viewModel.didTapRematch()
+            }
+            alert.addAction(rematchAction)
             present(alert, animated: true)
+            
         }
     }
         
