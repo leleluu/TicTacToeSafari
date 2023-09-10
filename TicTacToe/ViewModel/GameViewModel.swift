@@ -57,41 +57,17 @@ class GameViewModel {
     }
     
     var onStateChange: (() -> ())?
-    
-    // MARK: - Public Methods
-    
-    func takeTurn(row: Int, column: Int) {
-        grid.set(model.playerOne.isActive ? playerOneName : playerTwoName, row: row, column: column)
-        
-        checkForWinner()
-        numberOfMovesLeft -= 1
-        model.toggleActivePlayer()
-        onStateChange?() 
-    }
-    
-    func didTapRematch() {
-        // reset state
-        grid = Grid(rows: 3, columns: 3)
-        numberOfMovesLeft = 9
-        
-        // TODO: Pick random emojis
-        model = GameModel(
-            playerOne: Player(name: "🐳", isActive: true),
-            playerTwo: Player(name: "🦆", isActive: false)
-        )
-        winner = nil
-        onStateChange?()
-        
-    }
 
-    func checkForWinner() {
+    // MARK: - Private Methods
+    
+    private func checkForWinner() {
         checkRows()
         checkColumns()
         checkDiagonal()
 
     }
     
-    func checkDiagonal() {
+    private func checkDiagonal() {
         // check middle tile is filled
         guard let playerName = grid.get(row: 1, column: 1) else { return }
         
@@ -108,7 +84,7 @@ class GameViewModel {
         }
     }
 
-    func check(row: Int) {
+    private func check(row: Int) {
         // first tile is filled
         guard let playerName = grid.get(row: row, column: 0) else { return }
         
@@ -118,13 +94,13 @@ class GameViewModel {
         }
     }
 
-    func checkRows() {
+    private func checkRows() {
         for row in 0...grid.rows - 1 {
             check(row: row)
         }
     }
 
-    func check(column: Int) {
+    private func check(column: Int) {
         guard let playerName = grid.get(row: 0, column: column) else { return }
 
         if grid.get(row: 1, column: column) == playerName
@@ -133,10 +109,35 @@ class GameViewModel {
         }
     }
     
-    func checkColumns() {
+    private func checkColumns() {
         for column in 0...grid.columns - 1 {
             check(column: column)
         }
     }
 
+    // MARK: - Public Methods
+    
+    func takeTurn(row: Int, column: Int) {
+        grid.set(model.playerOne.isActive ? playerOneName : playerTwoName, row: row, column: column)
+        
+        checkForWinner()
+        numberOfMovesLeft -= 1
+        model.toggleActivePlayer()
+        onStateChange?()
+    }
+    
+    func didTapRematch() {
+        // reset state
+        grid = Grid(rows: 3, columns: 3)
+        numberOfMovesLeft = 9
+        
+        // TODO: Pick random emojis
+        model = GameModel(
+            playerOne: Player(name: "🐳", isActive: true),
+            playerTwo: Player(name: "🦆", isActive: false)
+        )
+        winner = nil
+        onStateChange?()
+        
+    }
 }
