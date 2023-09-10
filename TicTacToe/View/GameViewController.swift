@@ -82,7 +82,8 @@ class GameViewController: UIViewController {
         playerTurnIndicator.activePlayerIndex = viewModel.activePlayerIndex
         
         if let winner = viewModel.winner {
-            // present alert
+            let alert = UIAlertController(title: "\(winner) won!", message: nil, preferredStyle: .alert)
+            present(alert, animated: true)
         }
     }
         
