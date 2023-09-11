@@ -85,8 +85,8 @@ class GameViewController: UIViewController {
         }
         playerTurnIndicator.activePlayerIndex = viewModel.activePlayerIndex
         
-        if let winner = viewModel.winner {
-            let alert = UIAlertController(title: "\(winner) won!", message: nil, preferredStyle: .alert)
+        if let message = viewModel.gameEndedMessage {
+            let alert = UIAlertController(title: message, message: nil, preferredStyle: .alert)
             let rematchAction = UIAlertAction(title: "Rematch", style: .default) { [weak self] action in
                 self?.viewModel.didTapRematch()
             }

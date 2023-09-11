@@ -13,12 +13,19 @@ class GameViewModel {
     
     private var numberOfMovesLeft = 9
     private var grid = Grid(rows: 3, columns: 3)
-
+    private var winner: String?
     
     // MARK: - Public Properties
     
-        
-    var winner: String?
+    var gameEndedMessage: String? {
+        if let winner = winner {
+            return "\(winner) won!"
+        } else if numberOfMovesLeft == 0 {
+            return "It's a tie! 🤝"
+        } else {
+            return nil
+        }
+    }
     
     var markers: [Marker] {
         var markers: [Marker] = []
@@ -40,6 +47,7 @@ class GameViewModel {
     var playerOneName: String {
         model.playerOne.name
     }
+    
     var playerTwoName: String {
         model.playerTwo.name
     }
@@ -64,7 +72,6 @@ class GameViewModel {
         checkRows()
         checkColumns()
         checkDiagonal()
-
     }
     
     private func checkDiagonal() {
@@ -114,12 +121,15 @@ class GameViewModel {
             check(column: column)
         }
     }
-
+    
     // MARK: - Public Methods
     
     func takeTurn(row: Int, column: Int) {
-        grid.set(model.playerOne.isActive ? playerOneName : playerTwoName, row: row, column: column)
-        
+        grid.set(
+            model.playerOne.isActive ? playerOneName : playerTwoName,
+            row: row,
+            column: column
+        )
         checkForWinner()
         numberOfMovesLeft -= 1
         model.toggleActivePlayer()
@@ -138,6 +148,5 @@ class GameViewModel {
         )
         winner = nil
         onStateChange?()
-        
     }
 }
