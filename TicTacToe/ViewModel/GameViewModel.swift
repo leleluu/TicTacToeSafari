@@ -6,10 +6,24 @@ class GameViewModel {
     
     // MARK: - Private Properties
     
-    private var model = GameModel(
-        playerOne: Player(name: "🐻", isActive: true),
-        playerTwo: Player(name: "🐼", isActive: false)
-    )
+    private let playerOptions = [
+        "🐻", "🐷", "🐯", "🦆", "🐳", "🐶", "🦁", "🐨", "🐮", "🐙", "🐹", "🐝", "🐌", "🐢", "🐭", "🐡", "🐼", "🪿", "🫎"
+    ]
+    
+    private func getRandomPlayerPair() -> (firstPlayer: String, secondPlayer: String) {
+        let shuffledPlayers = playerOptions.shuffled()
+        return (firstPlayer: shuffledPlayers[0], secondPlayer: shuffledPlayers[1])
+    }
+
+    
+    lazy private var model: GameModel = {
+        let randomPlayerPair = getRandomPlayerPair()
+        return GameModel(
+            playerOne: Player(name: randomPlayerPair.firstPlayer, isActive: true),
+            playerTwo: Player(name: randomPlayerPair.secondPlayer, isActive: false)
+        )
+
+    }()
     
     private var numberOfMovesLeft = 9
     private var grid = Grid(rows: 3, columns: 3)
@@ -92,7 +106,7 @@ class GameViewModel {
     }
 
     private func check(row: Int) {
-        // first tile is filled
+        // check first tile is filled
         guard let playerName = grid.get(row: row, column: 0) else { return }
         
         if grid.get(row: row, column: 1) == playerName
@@ -141,10 +155,10 @@ class GameViewModel {
         grid = Grid(rows: 3, columns: 3)
         numberOfMovesLeft = 9
         
-        // TODO: Pick random emojis
+        let randomPlayerPair = getRandomPlayerPair()
         model = GameModel(
-            playerOne: Player(name: "🐳", isActive: true),
-            playerTwo: Player(name: "🦆", isActive: false)
+            playerOne: Player(name: randomPlayerPair.firstPlayer, isActive: true),
+            playerTwo: Player(name: randomPlayerPair.secondPlayer, isActive: false)
         )
         winner = nil
         onStateChange?()
