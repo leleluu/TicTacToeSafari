@@ -7,9 +7,13 @@ class PlayerView: UIView {
     var isActive = false {
         didSet {
             if isActive {
-                backgroundColor = .systemOrange.withAlphaComponent(0.5)
+                UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseIn) {
+                    self.backgroundColor = .systemOrange.withAlphaComponent(0.5)
+                }
             } else {
-                backgroundColor = .systemBackground
+                UIView.animate(withDuration: 0.25, delay: 0, options: .curveEaseOut) {
+                    self.backgroundColor = UIColor.systemBackground
+                }
             }
         }
     }
