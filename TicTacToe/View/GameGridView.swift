@@ -94,7 +94,7 @@ class GameGridView: UIView {
         for button in buttons {
             if button.row == row && button.column == column {
                 button.button.setTitle(marker, for: .normal)
-                button.button.titleLabel?.font = UIFont.preferredFont(forTextStyle: .largeTitle)
+                button.button.titleLabel?.font = UIFont.systemFont(ofSize: 34)
                 button.button.isEnabled = false
             }
         }

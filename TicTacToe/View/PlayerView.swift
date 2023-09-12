@@ -23,7 +23,7 @@ class PlayerView: UIView {
     private lazy var playerNameLabel: UILabel = {
         let label = UILabel()
         label.text = "A"
-        label.font = UIFont.preferredFont(forTextStyle: .largeTitle)
+        label.font = UIFont.systemFont(ofSize: 34)
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         return label

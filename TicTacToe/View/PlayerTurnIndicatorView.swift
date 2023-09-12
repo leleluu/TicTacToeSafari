@@ -51,7 +51,7 @@ class PlayerTurnIndicatorView: UIView {
     private lazy var versusLabel: UILabel = {
         let label = UILabel()
         label.text = "vs"
-        label.font = UIFont.preferredFont(forTextStyle: .largeTitle)
+        label.font = UIFont.systemFont(ofSize: 24)
         label.textAlignment = .center
         label.setContentHuggingPriority(.required, for: .horizontal)
         label.translatesAutoresizingMaskIntoConstraints = false

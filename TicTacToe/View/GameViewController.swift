@@ -21,7 +21,7 @@ class GameViewController: UIViewController {
     private lazy var gameStatusLabel: UILabel = {
         let label = UILabel()
         label.text = viewModel.numberOfMovesLeftText
-        label.font = UIFont.preferredFont(forTextStyle: .title1)
+        label.font = UIFont.systemFont(ofSize: 28)
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
