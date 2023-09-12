@@ -12,8 +12,8 @@ class GameViewController: UIViewController {
         return view
     }()
 
-    private lazy var gameGrid: GameGrid = {
-        let grid = GameGrid()
+    private lazy var gameGrid: GameGridView = {
+        let grid = GameGridView()
         grid.translatesAutoresizingMaskIntoConstraints = false
         return grid
     }()

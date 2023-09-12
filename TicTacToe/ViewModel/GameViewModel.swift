@@ -16,9 +16,9 @@ class GameViewModel {
     }
 
     
-    lazy private var model: GameModel = {
+    lazy private var model: Game = {
         let randomPlayerPair = getRandomPlayerPair()
-        return GameModel(
+        return Game(
             playerOne: Player(name: randomPlayerPair.firstPlayer, isActive: true),
             playerTwo: Player(name: randomPlayerPair.secondPlayer, isActive: false)
         )
@@ -156,7 +156,7 @@ class GameViewModel {
         numberOfMovesLeft = 9
         
         let randomPlayerPair = getRandomPlayerPair()
-        model = GameModel(
+        model = Game(
             playerOne: Player(name: randomPlayerPair.firstPlayer, isActive: true),
             playerTwo: Player(name: randomPlayerPair.secondPlayer, isActive: false)
         )

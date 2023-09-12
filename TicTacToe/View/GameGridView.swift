@@ -1,6 +1,6 @@
 import UIKit
 
-class GameGrid: UIView {
+class GameGridView: UIView {
     
     // MARK: - Public Properties
     
