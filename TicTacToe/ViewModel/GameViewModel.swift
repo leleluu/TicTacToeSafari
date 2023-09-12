@@ -25,7 +25,7 @@ class GameViewModel {
 
     }()
     
-    private var numberOfMovesLeft = 9
+    private var numberOfSpotsLeft = 9
     private var grid = Grid(rows: 3, columns: 3)
     private var winner: String?
     
@@ -34,7 +34,7 @@ class GameViewModel {
     var gameEndedMessage: String? {
         if let winner = winner {
             return "\(winner) won!"
-        } else if numberOfMovesLeft == 0 {
+        } else if numberOfSpotsLeft == 0 {
             return "It's a tie! 🤝"
         } else {
             return nil
@@ -66,11 +66,12 @@ class GameViewModel {
         model.playerTwo.name
     }
     
-    var numberOfMovesLeftText: String {
-        if gameEndedMessage == nil {
-            return "\(numberOfMovesLeft) number of moves left"
-        } else {
+    var numberOfSpotsLeftText: String {
+        if gameEndedMessage != nil || numberOfSpotsLeft == 9 {
             return ""
+        } else {
+            let text = (numberOfSpotsLeft == 1) ? "\(numberOfSpotsLeft) spot left" : "\(numberOfSpotsLeft) spots left"
+            return text
         }
     }
     
@@ -149,7 +150,7 @@ class GameViewModel {
             column: column
         )
         checkForWinner()
-        numberOfMovesLeft -= 1
+        numberOfSpotsLeft -= 1
         model.toggleActivePlayer()
         onStateChange?()
     }
@@ -157,7 +158,7 @@ class GameViewModel {
     func didTapRematch() {
         // reset state
         grid = Grid(rows: 3, columns: 3)
-        numberOfMovesLeft = 9
+        numberOfSpotsLeft = 9
         
         let randomPlayerPair = getRandomPlayerPair()
         model = Game(

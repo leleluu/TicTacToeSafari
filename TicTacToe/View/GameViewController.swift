@@ -20,7 +20,7 @@ class GameViewController: UIViewController {
     
     private lazy var gameStatusLabel: UILabel = {
         let label = UILabel()
-        label.text = viewModel.numberOfMovesLeftText
+        label.text = viewModel.numberOfSpotsLeftText
         label.font = UIFont.systemFont(ofSize: 28)
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -74,7 +74,7 @@ class GameViewController: UIViewController {
     }
     
     private func updateViewStateWithViewModel() {
-        gameStatusLabel.text = viewModel.numberOfMovesLeftText
+        gameStatusLabel.text = viewModel.numberOfSpotsLeftText
         playerTurnIndicator.setPlayerNames(playerOneName: viewModel.playerOneName, playerTwoName: viewModel.playerTwoName)
         for marker in viewModel.markers {
             if let playerName = marker.playerName {
