@@ -60,8 +60,8 @@ class GameViewController: UIViewController {
             playerTurnIndicator.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.2),
             
             // game grid
-            gameGrid.leadingAnchor.constraint(equalTo: playerTurnIndicator.leadingAnchor),
-            gameGrid.trailingAnchor.constraint(equalTo: playerTurnIndicator.trailingAnchor),
+            gameGrid.leadingAnchor.constraint(equalTo: playerTurnIndicator.leadingAnchor, constant: 16),
+            gameGrid.trailingAnchor.constraint(equalTo: playerTurnIndicator.trailingAnchor, constant: -16),
             gameGrid.bottomAnchor.constraint(equalTo: gameStatusLabel.topAnchor),
             gameGrid.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.6),
             
