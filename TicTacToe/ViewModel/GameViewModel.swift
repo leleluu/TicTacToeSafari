@@ -67,7 +67,11 @@ class GameViewModel {
     }
     
     var numberOfMovesLeftText: String {
-        "\(numberOfMovesLeft) number of moves left"
+        if gameEndedMessage == nil {
+            return "\(numberOfMovesLeft) number of moves left"
+        } else {
+            return ""
+        }
     }
     
     var activePlayerIndex: Int {
