@@ -45,7 +45,6 @@ class GameViewModel {
         var markers: [Marker] = []
         for row in 0...grid.rows - 1 {
             for column in 0...grid.columns - 1 {
-                
                 let name = grid.get(row: row, column: column)
                 let marker = (
                     playerName: name,
