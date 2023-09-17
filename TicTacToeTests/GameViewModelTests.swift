@@ -138,6 +138,7 @@ final class GameViewModelTests: XCTestCase {
         
         viewModel.takeTurn(row: 0, column: 0)
         XCTAssertEqual(viewModel.numberOfSpotsLeftText, "8 spots left")
+        viewModel.takeTurn(row: 0, column: 1)
         XCTAssertEqual(viewModel.numberOfSpotsLeftText, "7 spots left")
         
     }
